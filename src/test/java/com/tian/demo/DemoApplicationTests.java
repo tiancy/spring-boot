@@ -1,15 +1,14 @@
-package com.example.demo;
+package com.tian.demo;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.model.Users;
+import com.tian.demo.model.Users;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,7 +19,7 @@ public class DemoApplicationTests {
 	}
 
 	@Autowired
-	private com.example.mapper.UserMapper UserMapper;
+	private com.tian.demo.mapper.UserMapper UserMapper;
 
 	@Test
 	public void testInsert() throws Exception {

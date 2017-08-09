@@ -1,4 +1,4 @@
-package com.example.mapper;
+package com.tian.demo.mapper;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.example.model.Users;
+import com.tian.demo.model.Users;
 
 public interface UserMapper {
 	
