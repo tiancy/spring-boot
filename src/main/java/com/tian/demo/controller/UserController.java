@@ -3,6 +3,7 @@ package com.tian.demo.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,18 +13,32 @@ import com.tian.demo.mapper.UserMapper;
 import com.tian.demo.model.Users;
 
 @RestController
-@RequestMapping("/demo")
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
 	private UserMapper userMapper;
 
-	@RequestMapping("/user/{id}")
-	@Cacheable(value="demo-user")
+	@RequestMapping("/get/{id}")
+	@Cacheable(value="user", key="#id")
 	public Users getUser(@PathVariable Long id, HttpSession session) {
-		Users u = userMapper.getOne(id);
+		Users user = userMapper.getOne(id);
 		
 		System.out.println(session.getId());
-		return u;
+		return user;
+	}
+	
+	@RequestMapping("/delete/{id}")
+	@CacheEvict(value="user", key="#id")
+	public String delete(@PathVariable Long id) {
+		userMapper.delete(id);
+		return "success";
+	}
+	
+	@RequestMapping("/deleteAll")
+	@CacheEvict(value="user", allEntries=true)
+	public String deleteAll() {
+		userMapper.deleteAll();
+		return "success";
 	}
 }
