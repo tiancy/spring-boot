@@ -20,7 +20,7 @@ public class UserController {
 	private UserMapper userMapper;
 
 	@RequestMapping("/get/{id}")
-	@Cacheable(value="user", key="#id")
+	@Cacheable(value="users", key="'demo:user:'+#id")
 	public Users getUser(@PathVariable Long id, HttpSession session) {
 		Users user = userMapper.getOne(id);
 		
@@ -29,7 +29,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/delete/{id}")
-	@CacheEvict(value="user", key="#id")
+	@CacheEvict(value="user", key="'demo:user:'+#id")
 	public String delete(@PathVariable Long id) {
 		userMapper.delete(id);
 		return "success";
